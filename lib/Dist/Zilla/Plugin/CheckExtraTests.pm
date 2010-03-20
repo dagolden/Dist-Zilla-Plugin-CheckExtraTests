@@ -1,0 +1,43 @@
+use strict;
+use warnings;
+package Dist::Zilla::Plugin::CheckExtraTests;
+# ABSTRACT: a module for CPAN
+
+# Dependencies
+use autodie 2.00;
+use Moose 0.99;
+use namespace::autoclean 0.09;
+
+# extends, roles, attributes, etc.
+
+# methods
+
+__PACKAGE__->meta->make_immutable;
+
+1;
+
+__END__
+
+=begin wikidoc
+
+= SYNOPSIS
+
+  use Dist::Zilla::Plugin::CheckExtraTests;
+
+= DESCRIPTION
+
+This module might be cool, but you'd never know it from the lack
+of documentation.
+
+= USAGE
+
+Good luck!
+
+= SEE ALSO
+
+Maybe other modules do related things.
+
+=end wikidoc
+
+=cut
+
