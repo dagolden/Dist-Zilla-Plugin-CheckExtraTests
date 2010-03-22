@@ -19,12 +19,12 @@ sub before_release {
   my $self = shift;
 
   # chdir in
-  local $File::chdir::CWD = $self->built_in;
+  local $File::chdir::CWD = $self->zilla->ensure_built_in;
  
   # prove xt
   local $ENV{RELEASE_TESTING} = 1;
   my $app = App::Prove->new;
-  $app->process_args(qw/-r -l xt/);
+  $app->process_args(qw/-r -l -q xt/);
   $app->run or $self->log_fatal("Fatal errors in xt tests");
   return;
 }

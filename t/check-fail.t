@@ -1,0 +1,32 @@
+#!perl
+
+use strict;
+use warnings;
+
+use Dist::Zilla     1.093250;
+use Path::Class;
+use Capture::Tiny qw/capture/;
+use Test::More      tests => 1;
+use Test::Exception;
+
+# build fake repository
+chdir( dir('t', 'check-fail') );
+dir('xt')->mkpath;
+my $t_fh = file("xt/fail.t")->openw;
+print {$t_fh} << 'HERE';
+use Test::More tests => 1;
+fail("doomed to fail");
+HERE
+close $t_fh;
+
+my $zilla = Dist::Zilla->from_config;
+
+# fail xt test
+my ($out, $err) = capture { 
+  system( $^X, '-MDist::Zilla::App', '-e', 'Dist::Zilla::App->run', 'release' );
+};
+
+like( $out, qr/Fatal errors in xt/, 'failed xt test msg on STDOUT');
+
+END { unlink 'Foo-1.23.tar.gz'; dir("xt")->rmtree };
+
