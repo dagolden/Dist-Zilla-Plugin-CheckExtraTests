@@ -4,8 +4,8 @@ use strict;
 use warnings;
 
 use Dist::Zilla     1.093250;
-use Path::Class;
 use Capture::Tiny qw/capture/;
+use Path::Class;
 use Test::More      tests => 1;
 use Test::Exception;
 
@@ -22,10 +22,7 @@ close $t_fh;
 my $zilla = Dist::Zilla->from_config;
 
 # fail xt test
-my ($out, $err) = capture { 
-  system( $^X, '-MDist::Zilla::App', '-e', 'Dist::Zilla::App->run', 'release' );
-};
-
+my ($out, $err) = capture { eval { $zilla->release} };
 like( $out, qr/Fatal errors in xt/, 'failed xt test msg on STDOUT');
 
 END { unlink 'Foo-1.23.tar.gz'; dir("xt")->rmtree };

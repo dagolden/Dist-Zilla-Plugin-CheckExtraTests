@@ -21,8 +21,7 @@ close $t_fh;
 
 my $zilla = Dist::Zilla->from_config;
 
-
-# fail xt test
+# pass xt test
 my ($out, $err) = capture { eval { $zilla->release} };
 ok( ! $@, "doesn't die" );
 
