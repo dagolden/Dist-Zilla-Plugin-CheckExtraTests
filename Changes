@@ -2,4 +2,9 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - fixed problem in release check
+
+0.001     2010-03-22 01:10:12 EST5EDT
+
+
     - first draft
