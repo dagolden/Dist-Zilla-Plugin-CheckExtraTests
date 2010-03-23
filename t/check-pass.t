@@ -23,7 +23,7 @@ my $zilla = Dist::Zilla->from_config;
 
 # pass xt test
 my ($out, $err) = capture { eval { $zilla->release} };
-ok( ! $@, "doesn't die" );
+is( $@, q{}, "doesn't die" );
 
-END { unlink 'Foo-1.23.tar.gz'; dir("xt")->rmtree };
+END { unlink 'Foo-1.23.tar.gz'; dir('Foo-1.23')->rmtree; dir("xt")->rmtree };
 

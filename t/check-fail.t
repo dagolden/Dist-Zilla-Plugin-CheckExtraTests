@@ -23,7 +23,8 @@ my $zilla = Dist::Zilla->from_config;
 
 # fail xt test
 my ($out, $err) = capture { eval { $zilla->release} };
-like( $out, qr/Fatal errors in xt/, 'failed xt test msg on STDOUT');
+like( $out, qr/Fatal errors in xt/, 'failed xt test msg on STDOUT')
+  or diag "OUT:\n$out\nERR:\n$err\n";
 
-END { unlink 'Foo-1.23.tar.gz'; dir("xt")->rmtree };
+END { unlink 'Foo-1.23.tar.gz'; dir('Foo-1.23')->rmtree; dir("xt")->rmtree };
 
