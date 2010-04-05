@@ -21,8 +21,31 @@ use Test::More tests => 1;
 pass("destined to succeed");
 HERE
 
-## XXX copy paste junk below
+## Tests start here
 
+{
+  my $tzil = Dist::Zilla::Tester->from_config(
+    { dist_root => 'corpus/DZ' },
+    {
+      add_files => {
+        'source/xt/checkme.t' => $xt_pass,
+      },
+    },
+  );
+  ok( $tzil, "created test dist that will pass xt tests");
+
+  capture { $tzil->release };
+
+  ok(
+    ! grep({ /Fatal errors in xt/i } @{ $tzil->log_messages }),
+    "No xt errors logged",
+  );
+  ok(
+    grep({ /fake release happen/i } @{ $tzil->log_messages }),
+    "FakeRelease executed",
+  );
+
+}
 
 {
   my $tzil;
@@ -49,39 +72,7 @@ HERE
       ! grep({ /fake release happen/i } @{ $tzil->log_messages }),
       "FakeRelease did not happen",
     );
-
   }
-
-}
-
-{
-  my $tzil;
-  try {
-    $tzil = Dist::Zilla::Tester->from_config(
-      { dist_root => 'corpus/DZ' },
-      {
-        add_files => {
-          'source/xt/checkme.t' => $xt_pass,
-        },
-      },
-    );
-    ok( $tzil, "created test dist that will pass xt tests");
-
-    capture { $tzil->release };
-  }
-  catch {
-    diag "ERROR: $_";
-  };
-
-  ok(
-    ! grep({ /Fatal errors in xt/i } @{ $tzil->log_messages }),
-    "No xt errors logged",
-  );
-  ok(
-    grep({ /fake release happen/i } @{ $tzil->log_messages }),
-    "FakeRelease executed",
-  );
-
 }
 
 done_testing;
