@@ -4,8 +4,9 @@ package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
 
 # Dependencies
+use Dist::Zilla 2.100950 (); # XXX really the next release after this date
 use App::Prove 3.00 ();
-use File::chdir 0.1002 ();
+use File::pushd 0 ();
 use Moose 0.99;
 use namespace::autoclean 0.09;
 
@@ -21,7 +22,7 @@ sub before_release {
   $self->zilla->ensure_built_in;
 
   # chdir in
-  local $File::chdir::CWD = $self->zilla->built_in; 
+  my $wd = File::pushd::pushd($self->zilla->built_in);
 
   # prove xt
   local $ENV{RELEASE_TESTING} = 1;

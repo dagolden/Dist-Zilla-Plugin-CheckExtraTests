@@ -37,7 +37,7 @@ sub execute {
   my ($self, $opt, $arg) = @_;
 
   require App::Prove;
-  require File::chdir;
+  require File::pushd;
   require File::Temp;
   require Path::Class;
 
@@ -52,7 +52,7 @@ sub execute {
 
   $self->zilla->ensure_built_in($target);
 
-  local $File::chdir::CWD = $target;
+  my $wd = File::pushd::pushd( $target );
 
   my $error;
 

@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - updated tests for Dist::Zilla 2.000+
+
+    - switched from File::chdir to File::pushd
+
 0.002     2010-03-23 19:28:48 EST5EDT
 
     - fixed problem in release check
