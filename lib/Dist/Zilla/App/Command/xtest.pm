@@ -31,6 +31,17 @@ A build that fails tests will be left behind for analysis, and F<dzil> will
 exit a non-zero value.  If the tests are successful, the build directory will
 be removed and F<dzil> will exit with status 0.
 
+You can also use 'xt' as an alias for 'xtest':
+
+  dzil xt
+
+If you provide one or more filenames on the command line, only
+those tests will be run (however deeply they are nested).  Glob
+patterns may also work, if you protect it from your shell.
+
+  dzil xtest pod-spell.t
+  dzil xtest 'dist*'          # don't expand to dist.ini
+
 =cut
 
 sub abstract { 'test your dist' }
