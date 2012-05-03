@@ -4,6 +4,7 @@ package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
 use Dist::Zilla::App -command;
 
+use Path::Class::Rule;
 use Moose::Autobox;
 
 =head1 SYNOPSIS
@@ -62,7 +63,14 @@ sub execute {
   my $error;
 
   my $app = App::Prove->new;
-  $app->process_args(qw/-r -l xt/);
+  if ( ref $arg eq 'ARRAY' && @$arg ) {
+    my $pcr = Path::Class::Rule->new->file->name(@$arg);
+    my @t = map { "$_" } $pcr->all( 'xt' );
+    $app->process_args(qw/-r -l/, @t);
+  }
+  else {
+    $app->process_args(qw/-r -l xt/);
+  }
   $error = "Failed xt tests" unless  $app->run;
 
   if ($error) {

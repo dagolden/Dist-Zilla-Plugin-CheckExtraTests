@@ -4,6 +4,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
     - add 'xt' as command alias for 'xtest'
 
+    - 'dzil xtest' now takes optional arguments that are
+      treated as xt test filenames to run.  These will
+      be found however deeply they are nested in xt.
+
 0.004     2010-04-08 14:51:28 EST5EDT
 
     - manually set prereqs instead of using
