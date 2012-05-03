@@ -1,0 +1,64 @@
+=pod
+
+=head1 NAME
+
+Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
+
+=head1 VERSION
+
+version 0.005
+
+=head1 SYNOPSIS
+
+In your dist.ini:
+
+   [CheckExtraTests]
+
+=head1 DESCRIPTION
+
+Runs all xt tests before release.  Dies if any fail.  Sets RELEASE_TESTING,
+but not AUTHOR_TESTING.
+
+=for Pod::Coverage::TrustPod before_release
+
+=head1 SEE ALSO
+
+=over
+
+=item *
+
+L<Dist::Zilla>
+
+=back
+
+=for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
+
+=head1 SUPPORT
+
+=head2 Bugs / Feature Requests
+
+Please report any bugs or feature requests through the issue tracker
+at L<http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-CheckExtraTests>.
+You will be notified automatically of any progress on your issue.
+
+=head2 Source Code
+
+This is open source software.  The code repository is available for
+public review and contribution under the terms of the license.
+
+L<https://github.com/dagolden/dist-zilla-plugin-checkextratests>
+
+  git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
+
+=head1 AUTHOR
+
+David Golden <dagolden@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2012 by David Golden.
+
+This is free software, licensed under:
+
+  The Apache License, Version 2.0, January 2004
+
