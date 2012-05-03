@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
+# VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date

@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
+# VERSION
 use Dist::Zilla::App -command;
 
 use Path::Class::Rule;
