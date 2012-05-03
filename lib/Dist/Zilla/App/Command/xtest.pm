@@ -67,12 +67,18 @@ sub execute {
   if ( ref $arg eq 'ARRAY' && @$arg ) {
     my $pcr = Path::Class::Rule->new->file->name(@$arg);
     my @t = map { "$_" } $pcr->all( 'xt' );
-    $app->process_args(qw/-r -l/, @t);
+    if ( @t ) {
+      $app->process_args(qw/-r -l/, @t) if @t;
+      $error = "Failed xt tests" unless  $app->run;
+    }
+    else {
+      $self->log("no xt files found matching: @$arg");
+    }
   }
   else {
     $app->process_args(qw/-r -l xt/);
+    $error = "Failed xt tests" unless  $app->run;
   }
-  $error = "Failed xt tests" unless  $app->run;
 
   if ($error) {
     $self->log($error);
