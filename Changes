@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - add 'xt' as command alias for 'xtest'
+
 0.004     2010-04-08 14:51:28 EST5EDT
 
     - manually set prereqs instead of using

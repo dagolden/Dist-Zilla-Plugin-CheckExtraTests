@@ -33,6 +33,11 @@ be removed and F<dzil> will exit with status 0.
 
 sub abstract { 'test your dist' }
 
+sub command_names {
+  my ($self) = @_;
+  return ( $self->SUPER::command_names, 'xt' );
+}
+
 sub execute {
   my ($self, $opt, $arg) = @_;
 
