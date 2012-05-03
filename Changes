@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+0.005     2012-05-03 17:30:08 America/New_York
+
     - add 'xt' as command alias for 'xtest'
 
     - 'dzil xtest' now takes optional arguments that are
