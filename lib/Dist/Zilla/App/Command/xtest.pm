@@ -44,7 +44,7 @@ patterns may also work, if you protect it from your shell.
 
 =cut
 
-sub abstract { 'test your dist' }
+sub abstract { 'run xt tests for your dist' }
 
 sub command_names {
   my ($self) = @_;
