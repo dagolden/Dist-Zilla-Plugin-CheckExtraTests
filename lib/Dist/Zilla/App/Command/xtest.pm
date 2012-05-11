@@ -72,6 +72,10 @@ sub execute {
 
   my $wd = File::pushd::pushd( $target );
 
+  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
+  die "no BuildRunner plugins specified" unless @builders;
+  $builders[0]->build;
+
   my $error;
 
   my $app = App::Prove->new;
@@ -79,7 +83,7 @@ sub execute {
     my $pcr = Path::Class::Rule->new->file->name(@$arg);
     my @t = map { "$_" } $pcr->all( 'xt' );
     if ( @t ) {
-      $app->process_args(qw/-r -l/, @t) if @t;
+      $app->process_args(qw/-r -b/, @t) if @t;
       $error = "Failed xt tests" unless  $app->run;
     }
     else {
@@ -87,7 +91,7 @@ sub execute {
     }
   }
   else {
-    $app->process_args(qw/-r -l xt/);
+    $app->process_args(qw/-r -b xt/);
     $error = "Failed xt tests" unless  $app->run;
   }
 

@@ -2,6 +2,11 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - run tests on the built dist, so that things like XS will work
+
+    - add RunExtraTests plugin, which runs the appropriate xt tests when "dzil
+      test" is run (but only with the appropriate flags).
+
 0.005     2012-05-03 17:30:08 America/New_York
 
     - add 'xt' as command alias for 'xtest'
