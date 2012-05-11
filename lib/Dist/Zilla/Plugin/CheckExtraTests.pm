@@ -25,10 +25,15 @@ sub before_release {
   # chdir in
   my $wd = File::pushd::pushd($self->zilla->built_in);
 
+  # make
+  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
+  die "no BuildRunner plugins specified" unless @builders;
+  $builders[0]->build;
+
   # prove xt
   local $ENV{RELEASE_TESTING} = 1;
   my $app = App::Prove->new;
-  $app->process_args(qw/-r -l xt/);
+  $app->process_args(qw/-r -b xt/);
   $app->run or $self->log_fatal("Fatal errors in xt tests");
   return;
 }
