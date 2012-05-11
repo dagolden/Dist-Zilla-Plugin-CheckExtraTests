@@ -1,10 +1,11 @@
 {
    "abstract" : "check xt tests before release",
    "author" : [
-      "David Golden <dagolden@cpan.org>"
+      "David Golden <dagolden@cpan.org>",
+      "Jesse Luehrs <doy@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120630",
+   "generated_by" : "Dist::Zilla version 4.300016, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "apache_2_0"
    ],
@@ -36,6 +37,7 @@
             "Dist::Zilla" : "2.100950",
             "Dist::Zilla::App" : "0",
             "Dist::Zilla::Role::BeforeRelease" : "0",
+            "Dist::Zilla::Role::TestRunner" : "0",
             "File::Temp" : "0",
             "File::pushd" : "0",
             "Moose" : "0.99",
@@ -57,6 +59,7 @@
             "Params::Util" : "0",
             "Sub::Exporter" : "0",
             "Test::More" : "0.88",
+            "Test::Requires" : "0",
             "Try::Tiny" : "0"
          }
       }
@@ -64,11 +67,15 @@
    "provides" : {
       "Dist::Zilla::App::Command::xtest" : {
          "file" : "lib/Dist/Zilla/App/Command/xtest.pm",
-         "version" : "0.005"
+         "version" : "0.006"
       },
       "Dist::Zilla::Plugin::CheckExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckExtraTests.pm",
-         "version" : "0.005"
+         "version" : "0.006"
+      },
+      "Dist::Zilla::Plugin::RunExtraTests" : {
+         "file" : "lib/Dist/Zilla/Plugin/RunExtraTests.pm",
+         "version" : "0.006"
       }
    },
    "release_status" : "stable",
@@ -84,6 +91,6 @@
          "web" : "https://github.com/dagolden/dist-zilla-plugin-checkextratests"
       }
    },
-   "version" : "0.005"
+   "version" : "0.006"
 }
 

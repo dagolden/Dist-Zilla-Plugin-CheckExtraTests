@@ -6,7 +6,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -50,9 +50,19 @@ L<https://github.com/dagolden/dist-zilla-plugin-checkextratests>
 
   git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
 
-=head1 AUTHOR
+=head1 AUTHORS
+
+=over 4
+
+=item *
 
 David Golden <dagolden@cpan.org>
+
+=item *
+
+Jesse Luehrs <doy@cpan.org>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 
