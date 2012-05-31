@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - change RunExtraTests plugin to avoid rebuilding the dist when
+      it's not necessary (e.g. MakeMaker already ran the normal tests)
+      (thanks, Christopher J. Madsen)
+
 0.006     2012-05-10 23:08:11 America/New_York
 
     - run tests on the built dist, so that things like XS will work
