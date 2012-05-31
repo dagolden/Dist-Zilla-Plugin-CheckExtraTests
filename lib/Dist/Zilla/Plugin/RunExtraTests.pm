@@ -26,9 +26,18 @@ sub test {
   @dirs = grep { -d } @dirs;
   return unless @dirs;
 
-  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
-  die "no BuildRunner plugins specified" unless @builders;
-  $builders[0]->build;
+  # If the dist hasn't been built yet, then build it:
+  for my $tester (@{ $self->zilla->plugins_with(-TestRunner) }) {
+    last if $tester->does('Dist::Zilla::Role::BuildRunner');
+
+    if ($tester == $self) {
+      # We've reached ourself, and the dist hasn't been built:
+      my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
+      die "no BuildRunner plugins specified" unless @builders;
+      $builders[0]->build;
+      last;
+    }
+  }
 
   my $app = App::Prove->new;
   $app->process_args(qw/-r -b/, @dirs);
@@ -59,6 +68,10 @@ Runs xt tests when C<dzil test> is run. C<xt/release>, C<xt/author>, and
 C<xt/smoke> will be tested based on the values of the appropriate environment
 variables (C<RELEASE_TESTING>, C<AUTHOR_TESTING>, and C<AUTOMATED_TESTING>),
 which are set by C<dzil test>.
+
+If C<RunExtraTests> is listed after one of the normal test-running
+plugins (e.g. C<MakeMaker> or C<ModuleBuild>), then the dist will not
+be rebuilt between running the normal tests and the extra tests.
 
 = SEE ALSO
 
