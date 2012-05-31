@@ -27,16 +27,10 @@ sub test {
   return unless @dirs;
 
   # If the dist hasn't been built yet, then build it:
-  for my $tester (@{ $self->zilla->plugins_with(-TestRunner) }) {
-    last if $tester->does('Dist::Zilla::Role::BuildRunner');
-
-    if ($tester == $self) {
-      # We've reached ourself, and the dist hasn't been built:
-      my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
-      die "no BuildRunner plugins specified" unless @builders;
-      $builders[0]->build;
-      last;
-    }
+  unless (-d 'blib') {
+    my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
+    die "no BuildRunner plugins specified" unless @builders;
+    $builders[0]->build;
   }
 
   my $app = App::Prove->new;
