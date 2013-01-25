@@ -5,7 +5,7 @@
       "Jesse Luehrs <doy@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300016, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "apache_2_0"
    ],
@@ -29,6 +29,14 @@
       "configure" : {
          "requires" : {
             "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Pod::Coverage::TrustPod" : "0",
+            "Test::CPAN::Meta" : "0",
+            "Test::Pod" : "1.41",
+            "Test::Pod::Coverage" : "1.08"
          }
       },
       "runtime" : {
@@ -67,30 +75,29 @@
    "provides" : {
       "Dist::Zilla::App::Command::xtest" : {
          "file" : "lib/Dist/Zilla/App/Command/xtest.pm",
-         "version" : "0.007"
+         "version" : "0.008"
       },
       "Dist::Zilla::Plugin::CheckExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckExtraTests.pm",
-         "version" : "0.007"
+         "version" : "0.008"
       },
       "Dist::Zilla::Plugin::RunExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/RunExtraTests.pm",
-         "version" : "0.007"
+         "version" : "0.008"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "mailto" : "bug-dist-zilla-plugin-checkextratests at rt.cpan.org",
-         "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-CheckExtraTests"
+         "web" : "https://github.com/dagolden/dist-zilla-plugin-checkextratests/issues"
       },
-      "homepage" : "https://github.com/dagolden/dist-zilla-plugin-checkextratests",
+      "homepage" : "https://metacpan.org/release/Dist-Zilla-Plugin-CheckExtraTests",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/dagolden/dist-zilla-plugin-checkextratests.git",
+         "url" : "git://github.com/dagolden/dist-zilla-plugin-checkextratests.git",
          "web" : "https://github.com/dagolden/dist-zilla-plugin-checkextratests"
       }
    },
-   "version" : "0.007"
+   "version" : "0.008"
 }
 
