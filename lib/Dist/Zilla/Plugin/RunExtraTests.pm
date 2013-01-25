@@ -6,7 +6,6 @@ package Dist::Zilla::Plugin::RunExtraTests;
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
-use App::Prove 3.00 ();
 use Moose 0.99;
 use namespace::autoclean 0.09;
 
@@ -32,6 +31,9 @@ sub test {
     die "no BuildRunner plugins specified" unless @builders;
     $builders[0]->build;
   }
+
+  require App::Prove;
+  App::Prove->VERSION('3.00');
 
   my $app = App::Prove->new;
   $app->process_args(qw/-r -b/, @dirs);

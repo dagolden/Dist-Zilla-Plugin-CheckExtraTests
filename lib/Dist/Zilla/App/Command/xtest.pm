@@ -5,7 +5,6 @@ package Dist::Zilla::App::Command::xtest;
 # VERSION
 use Dist::Zilla::App -command;
 
-use Path::Class::Rule;
 use Moose::Autobox;
 
 =head1 SYNOPSIS
@@ -80,6 +79,7 @@ sub execute {
 
   my $app = App::Prove->new;
   if ( ref $arg eq 'ARRAY' && @$arg ) {
+    require Path::Class::Rule;
     my $pcr = Path::Class::Rule->new->file->name(@$arg);
     my @t = map { "$_" } $pcr->all( 'xt' );
     if ( @t ) {
