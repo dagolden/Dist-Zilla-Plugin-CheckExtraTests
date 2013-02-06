@@ -50,8 +50,8 @@
             "File::pushd" : "0",
             "Moose" : "0.99",
             "Moose::Autobox" : "0",
-            "Path::Class" : "0",
-            "Path::Class::Rule" : "0",
+            "Path::Iterator::Rule" : "0",
+            "Path::Tiny" : "0",
             "namespace::autoclean" : "0.09",
             "perl" : "5.006",
             "strict" : "0",
@@ -75,15 +75,15 @@
    "provides" : {
       "Dist::Zilla::App::Command::xtest" : {
          "file" : "lib/Dist/Zilla/App/Command/xtest.pm",
-         "version" : "0.008"
+         "version" : "0.009"
       },
       "Dist::Zilla::Plugin::CheckExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckExtraTests.pm",
-         "version" : "0.008"
+         "version" : "0.009"
       },
       "Dist::Zilla::Plugin::RunExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/RunExtraTests.pm",
-         "version" : "0.008"
+         "version" : "0.009"
       }
    },
    "release_status" : "stable",
@@ -98,6 +98,6 @@
          "web" : "https://github.com/dagolden/dist-zilla-plugin-checkextratests"
       }
    },
-   "version" : "0.008"
+   "version" : "0.009"
 }
 

@@ -2,6 +2,9 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - Swap Path::Class for Path::Tiny and Path::Class::Rule
+      for Path::Iterator::Rule
+
 0.008     2013-01-25 15:23:15 America/New_York
 
     - lazy loading of some dependencies (DOLMEN)
