@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - Bump Dist::Zilla prereq to something modernish
+
 0.009     2013-02-06 16:15:30 America/New_York
 
     - Swap Path::Class for Path::Tiny and Path::Class::Rule

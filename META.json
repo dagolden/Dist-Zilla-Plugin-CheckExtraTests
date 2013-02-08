@@ -42,7 +42,7 @@
       "runtime" : {
          "requires" : {
             "App::Prove" : "3.00",
-            "Dist::Zilla" : "2.100950",
+            "Dist::Zilla" : "4.3",
             "Dist::Zilla::App" : "0",
             "Dist::Zilla::Role::BeforeRelease" : "0",
             "Dist::Zilla::Role::TestRunner" : "0",
@@ -75,15 +75,15 @@
    "provides" : {
       "Dist::Zilla::App::Command::xtest" : {
          "file" : "lib/Dist/Zilla/App/Command/xtest.pm",
-         "version" : "0.009"
+         "version" : "0.010"
       },
       "Dist::Zilla::Plugin::CheckExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckExtraTests.pm",
-         "version" : "0.009"
+         "version" : "0.010"
       },
       "Dist::Zilla::Plugin::RunExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/RunExtraTests.pm",
-         "version" : "0.009"
+         "version" : "0.010"
       }
    },
    "release_status" : "stable",
@@ -98,6 +98,6 @@
          "web" : "https://github.com/dagolden/dist-zilla-plugin-checkextratests"
       }
    },
-   "version" : "0.009"
+   "version" : "0.010"
 }
 
