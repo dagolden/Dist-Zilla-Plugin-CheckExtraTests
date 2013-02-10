@@ -101,7 +101,7 @@ sub execute {
     exit 1;
   } else {
     $self->log("all's well; removing $target");
-    $target->rmtree;
+    $target->remove;
   }
 
 }
