@@ -60,7 +60,8 @@ In your dist.ini:
 
 = DESCRIPTION
 
-Runs xt tests when C<dzil test> is run. C<xt/release>, C<xt/author>, and
+Runs xt tests when the test phase is run (e.g. C<dzil test>, C<dzil release> etc).
+C<xt/release>, C<xt/author>, and
 C<xt/smoke> will be tested based on the values of the appropriate environment
 variables (C<RELEASE_TESTING>, C<AUTHOR_TESTING>, and C<AUTOMATED_TESTING>),
 which are set by C<dzil test>.

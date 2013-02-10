@@ -41,6 +41,9 @@ patterns may also work, if you protect it from your shell.
   dzil xtest pod-spell.t
   dzil xtest 'dist*'          # don't expand to dist.ini
 
+There is no need to add anything to F<dist.ini> -- installation of this module
+is sufficient to make the command available.
+
 =cut
 
 sub abstract { 'run xt tests for your dist' }
@@ -101,7 +104,7 @@ sub execute {
     exit 1;
   } else {
     $self->log("all's well; removing $target");
-    $target->rmtree;
+    $target->remove;
   }
 
 }
