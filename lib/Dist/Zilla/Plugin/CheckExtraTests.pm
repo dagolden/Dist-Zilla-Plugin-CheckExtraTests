@@ -47,26 +47,23 @@ __PACKAGE__->meta->make_immutable;
 __END__
 
 =for Pod::Coverage::TrustPod
-    before_release
+before_release
 
-=begin wikidoc
-
-= SYNOPSIS
+=head1 SYNOPSIS
 
 In your dist.ini:
 
   [CheckExtraTests]
 
-= DESCRIPTION
+=head1 DESCRIPTION
 
 Runs all xt tests before release.  Dies if any fail.  Sets RELEASE_TESTING,
 but not AUTHOR_TESTING.
 
-= SEE ALSO
+=head1 SEE ALSO
 
-* [Dist::Zilla]
-
-=end wikidoc
+=for :list
+* L<Dist::Zilla>
 
 =cut
 

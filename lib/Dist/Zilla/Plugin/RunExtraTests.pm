@@ -48,33 +48,29 @@ __PACKAGE__->meta->make_immutable;
 __END__
 
 =for Pod::Coverage::TrustPod
-    test
+test
 
-=begin wikidoc
-
-= SYNOPSIS
+=head1 SYNOPSIS
 
 In your dist.ini:
 
   [RunExtraTests]
 
-= DESCRIPTION
+=head1 DESCRIPTION
 
-Runs xt tests when the test phase is run (e.g. C<dzil test>, C<dzil release> etc).
-C<xt/release>, C<xt/author>, and
-C<xt/smoke> will be tested based on the values of the appropriate environment
-variables (C<RELEASE_TESTING>, C<AUTHOR_TESTING>, and C<AUTOMATED_TESTING>),
-which are set by C<dzil test>.
+Runs xt tests when the test phase is run (e.g. C<dzil test>, C<dzil release>
+etc).  C<xt/release>, C<xt/author>, and C<xt/smoke> will be tested based on the
+values of the appropriate environment variables (C<RELEASE_TESTING>,
+C<AUTHOR_TESTING>, and C<AUTOMATED_TESTING>), which are set by C<dzil test>.
 
 If C<RunExtraTests> is listed after one of the normal test-running
 plugins (e.g. C<MakeMaker> or C<ModuleBuild>), then the dist will not
 be rebuilt between running the normal tests and the extra tests.
 
-= SEE ALSO
+=head1 SEE ALSO
 
-* [Dist::Zilla]
-
-=end wikidoc
+=for :list
+* L<Dist::Zilla>
 
 =cut
 
