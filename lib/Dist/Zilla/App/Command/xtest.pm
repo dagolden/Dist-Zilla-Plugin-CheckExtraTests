@@ -76,7 +76,7 @@ sub execute {
 
   my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
   die "no BuildRunner plugins specified" unless @builders;
-  $builders[0]->build;
+  $_->build for @builders;
 
   my $error;
 

@@ -27,7 +27,7 @@ sub before_release {
   # make
   my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
   die "no BuildRunner plugins specified" unless @builders;
-  $builders[0]->build;
+  $_->build for @builders;
 
   require App::Prove;
   App::Prove->VERSION('3.00');
