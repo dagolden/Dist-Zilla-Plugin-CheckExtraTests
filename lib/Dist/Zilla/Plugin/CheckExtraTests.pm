@@ -5,8 +5,8 @@ package Dist::Zilla::Plugin::CheckExtraTests;
 # VERSION
 
 # Dependencies
-use Dist::Zilla 2.100950 (); # XXX really the next release after this date
-use Moose 0.99;
+use Dist::Zilla 2.3 ();
+use Moose 2;
 use namespace::autoclean 0.09;
 
 # extends, roles, attributes, etc.
