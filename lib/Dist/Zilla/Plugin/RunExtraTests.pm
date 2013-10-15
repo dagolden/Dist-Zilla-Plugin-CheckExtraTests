@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
 # VERSION
@@ -16,30 +17,30 @@ with 'Dist::Zilla::Role::TestRunner';
 # methods
 
 sub test {
-  my $self = shift;
+    my $self = shift;
 
-  my @dirs;
-  push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
-  push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
-  push @dirs, 'xt/smoke'   if $ENV{AUTOMATED_TESTING};
-  @dirs = grep { -d } @dirs;
-  return unless @dirs;
+    my @dirs;
+    push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
+    push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
+    push @dirs, 'xt/smoke'   if $ENV{AUTOMATED_TESTING};
+    @dirs = grep { -d } @dirs;
+    return unless @dirs;
 
-  # If the dist hasn't been built yet, then build it:
-  unless (-d 'blib') {
-    my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
-    die "no BuildRunner plugins specified" unless @builders;
-    $_->build for @builders;
-    die "no blib; failed to build properly?" unless -d 'blib';
-  }
+    # If the dist hasn't been built yet, then build it:
+    unless ( -d 'blib' ) {
+        my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
+        die "no BuildRunner plugins specified" unless @builders;
+        $_->build for @builders;
+        die "no blib; failed to build properly?" unless -d 'blib';
+    }
 
-  require App::Prove;
-  App::Prove->VERSION('3.00');
+    require App::Prove;
+    App::Prove->VERSION('3.00');
 
-  my $app = App::Prove->new;
-  $app->process_args(qw/-r -b/, @dirs);
-  $app->run or $self->log_fatal("Fatal errors in xt tests");
-  return;
+    my $app = App::Prove->new;
+    $app->process_args( qw/-r -b/, @dirs );
+    $app->run or $self->log_fatal("Fatal errors in xt tests");
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;

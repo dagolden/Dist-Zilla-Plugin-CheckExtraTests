@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
 # VERSION
@@ -16,28 +17,28 @@ with 'Dist::Zilla::Role::BeforeRelease';
 # methods
 
 sub before_release {
-  my $self = shift;
+    my $self = shift;
 
-  $self->zilla->ensure_built_in;
+    $self->zilla->ensure_built_in;
 
-  # chdir in
-  require File::pushd;
-  my $wd = File::pushd::pushd($self->zilla->built_in);
+    # chdir in
+    require File::pushd;
+    my $wd = File::pushd::pushd( $self->zilla->built_in );
 
-  # make
-  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
-  die "no BuildRunner plugins specified" unless @builders;
-  $_->build for @builders;
+    # make
+    my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
+    die "no BuildRunner plugins specified" unless @builders;
+    $_->build for @builders;
 
-  require App::Prove;
-  App::Prove->VERSION('3.00');
+    require App::Prove;
+    App::Prove->VERSION('3.00');
 
-  # prove xt
-  local $ENV{RELEASE_TESTING} = 1;
-  my $app = App::Prove->new;
-  $app->process_args(qw/-r -b xt/);
-  $app->run or $self->log_fatal("Fatal errors in xt tests");
-  return;
+    # prove xt
+    local $ENV{RELEASE_TESTING} = 1;
+    my $app = App::Prove->new;
+    $app->process_args(qw/-r -b xt/);
+    $app->run or $self->log_fatal("Fatal errors in xt tests");
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;
