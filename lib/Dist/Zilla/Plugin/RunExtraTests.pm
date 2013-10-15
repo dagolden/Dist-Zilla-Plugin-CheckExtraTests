@@ -29,7 +29,8 @@ sub test {
   unless (-d 'blib') {
     my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
     die "no BuildRunner plugins specified" unless @builders;
-    $builders[0]->build;
+    $_->build for @builders;
+    die "no blib; failed to build properly?" unless -d 'blib';
   }
 
   require App::Prove;
