@@ -2,6 +2,13 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Changed]
+
+    - 'dzil xtest' arguments now match as regex patterns for more
+      flexibility
+
+    [Fixed]
+
     - use all builders to build, not just the first (Karen Etheridge)
 
 0.011     2013-02-09 20:53:59 America/New_York

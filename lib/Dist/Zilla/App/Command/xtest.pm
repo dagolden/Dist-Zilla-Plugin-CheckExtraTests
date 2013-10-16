@@ -36,11 +36,15 @@ You can also use 'xt' as an alias for 'xtest':
   dzil xt
 
 If you provide one or more filenames on the command line, only
-those tests will be run (however deeply they are nested).  Glob
-patterns may also work, if you protect it from your shell.
+those tests will be run (however deeply they are nested).
 
   dzil xtest pod-spell.t
-  dzil xtest 'dist*'          # don't expand to dist.ini
+
+Arguments are turned into regexp patterns, so you can
+do any sort of partial match you want:
+
+  dzil xtest author/    # just the author tests
+  dzil xtest spell      # a test with 'spell' in the path
 
 There is no need to add anything to F<dist.ini> -- installation of this module
 is sufficient to make the command available.
@@ -84,7 +88,12 @@ sub execute {
     my $app = App::Prove->new;
     if ( ref $arg eq 'ARRAY' && @$arg ) {
         require Path::Iterator::Rule;
-        my $pcr = Path::Iterator::Rule->new->file->name(@$arg);
+        my $pcr = Path::Iterator::Rule->new->file->and(
+            sub {
+                my $path = $_;
+                return grep { $path =~ /$_/ } @$arg;
+            }
+        );
         my @t = map { "$_" } $pcr->all('xt');
         if (@t) {
             $app->process_args( qw/-r -b/, @t ) if @t;
