@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+0.012     2013-10-15 23:15:02 America/New_York
+
     [Changed]
 
     - 'dzil xtest' arguments now match as regex patterns for more
