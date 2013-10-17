@@ -20,9 +20,9 @@ sub test {
     my $self = shift;
 
     my @dirs;
-    push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
     push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
     push @dirs, 'xt/smoke'   if $ENV{AUTOMATED_TESTING};
+    push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
     @dirs = grep { -d } @dirs;
     return unless @dirs;
 

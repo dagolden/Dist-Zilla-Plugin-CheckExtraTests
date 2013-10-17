@@ -2,6 +2,11 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Changed]
+
+    - [RunExtraTests] now runs xt/author ahead of xt/smoke and xt/release
+      (Karen Etheridge)
+
 0.012     2013-10-15 23:15:02 America/New_York
 
     [Changed]
