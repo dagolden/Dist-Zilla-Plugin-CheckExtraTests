@@ -2,6 +2,11 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Fixed]
+
+    - 'dzil xtest' now updates the latest and previous symlinks under .build
+      (Karen Etheridge)
+
 0.013     2013-10-17 17:26:26 America/New_York
 
     [Changed]
