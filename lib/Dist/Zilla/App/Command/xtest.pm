@@ -70,10 +70,29 @@ sub execute {
     $build_root->mkpath unless -d $build_root;
 
     my $target = Path::Tiny::path( File::Temp::tempdir( DIR => $build_root ) );
-    $self->log("building test distribution under $target");
+    $self->log("building distribution under $target for extra testing");
 
     local $ENV{AUTHOR_TESTING}  = 1;
     local $ENV{RELEASE_TESTING} = 1;
+
+    my $os_has_symlinks = eval { symlink("",""); 1 };
+    my $previous;
+    my $latest;
+
+    if( $os_has_symlinks ) {
+        $previous = file( $build_root, 'previous' );
+        $latest   = file( $build_root, 'latest'   );
+        if( -l $previous ) {
+            $previous->remove
+                or $self->log("cannot remove old .build/previous link");
+        }
+        if( -l $latest ) {
+            rename $latest, $previous
+                or $self->log("cannot move .build/latest link to .build/previous");
+        }
+        symlink $target->basename, $latest
+            or $self->log('cannot create link .build/latest');
+    }
 
     $self->zilla->ensure_built_in($target);
 
