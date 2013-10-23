@@ -17,27 +17,53 @@ with 'Dist::Zilla::Role::BeforeRelease';
 # methods
 
 sub before_release {
-    my $self = shift;
+    my ( $self, $tgz ) = @_;
+    $tgz = $tgz->absolute;
 
-    $self->zilla->ensure_built_in;
+    my $build_root = $self->zilla->root->subdir('.build');
+    $build_root->mkpath unless -d $build_root;
 
-    # chdir in
-    require File::pushd;
-    my $wd = File::pushd::pushd( $self->zilla->built_in );
+    my $tmpdir = Path::Class::dir( File::Temp::tempdir( DIR => $build_root ) );
 
-    # make
-    my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
-    die "no BuildRunner plugins specified" unless @builders;
-    $_->build for @builders;
+    $self->log("Extracting $tgz to $tmpdir");
 
-    require App::Prove;
-    App::Prove->VERSION('3.00');
+    require Archive::Tar;
 
-    # prove xt
+    my @files = do {
+        my $wd = File::pushd::pushd($tmpdir);
+        Archive::Tar->extract_archive("$tgz");
+    };
+
+    $self->log_fatal( [ "Failed to extract archive: %s", Archive::Tar->error ] )
+      unless @files;
+
+    # Run tests on the extracted tarball:
+    my $target = $tmpdir->subdir( $self->zilla->dist_basename );
+
     local $ENV{RELEASE_TESTING} = 1;
-    my $app = App::Prove->new;
-    $app->process_args(qw/-r -b xt/);
-    $app->run or $self->log_fatal("Fatal errors in xt tests");
+    local $ENV{AUTHOR_TESTING}  = 1;
+
+    {
+        # chdir in
+        require File::pushd;
+        my $wd = File::pushd::pushd($target);
+
+        # make
+        my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
+        die "no BuildRunner plugins specified" unless @builders;
+        $_->build for @builders;
+
+        require App::Prove;
+        App::Prove->VERSION('3.00');
+
+        my $app = App::Prove->new;
+        $app->process_args(qw/-r -b xt/);
+        $app->run or $self->log_fatal("Fatal errors in xt tests");
+    }
+
+    $self->log("all's well; removing $tmpdir");
+    $tmpdir->rmtree;
+
     return;
 }
 
@@ -58,8 +84,13 @@ In your dist.ini:
 
 =head1 DESCRIPTION
 
-Runs all xt tests before release.  Dies if any fail.  Sets RELEASE_TESTING,
-but not AUTHOR_TESTING.
+Runs all xt tests before release.  Dies if any fail.  Sets RELEASE_TESTING
+and AUTHOR_TESTING.
+
+If you use L<Dist::Zilla::Plugin::TestRelease>, you should consider using
+L<Dist::Zilla::Plugin::RunExtraTests> instead, which enables xt tests to
+run as part of C<[TestRelease]> and is thus a bit more efficient as the
+distribution is only built once for testing.
 
 =head1 SEE ALSO
 
