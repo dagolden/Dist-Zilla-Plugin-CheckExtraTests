@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+0.015     2013-10-31 15:03:13 America/New_York
+
     - Shipping as a stable release
 
 0.014     2013-10-23 19:52:43 America/New_York
