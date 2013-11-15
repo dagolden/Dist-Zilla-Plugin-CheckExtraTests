@@ -12,7 +12,7 @@ use Moose::Autobox;
 
 Run xt tests for your distribution:
 
-  dzil xtest
+  dzil xtest [ --no-author] [ --no-release ] [ --no-automated ] [ --all ]
 
 This runs with AUTHOR_TESTING and RELEASE_TESTING environment variables turned
 on, so it's like doing this:
@@ -53,6 +53,33 @@ is sufficient to make the command available.
 
 =cut
 
+sub opt_spec {
+  [ 'author!' => 'enables the AUTHOR_TESTING env variable (default behavior)', { default => 1 } ],
+  [ 'release!'   => 'enables the RELEASE_TESTING env variable (default behavior)', { default => 1 } ],
+  [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
+  [ 'all' => 'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables', { default => 0 } ]
+}
+
+=head1 OPTIONS
+
+=head2 --no-author
+
+This will run the test suite without setting AUTHOR_TESTING
+
+=head2 --no-release
+
+This will run the test suite without setting RELEASE_TESTING
+
+=head2 --automated
+
+This will run the test suite with AUTOMATED_TESTING=1
+
+=head2 --all
+
+Equivalent to --release --automated --author
+
+=cut
+
 sub abstract { 'run xt tests for your dist' }
 
 sub command_names {
@@ -66,8 +93,9 @@ sub execute {
     require App::Prove;
     require File::pushd;
 
-    local $ENV{AUTHOR_TESTING}  = 1;
-    local $ENV{RELEASE_TESTING} = 1;
+    local $ENV{AUTHOR_TESTING} = 1 if $opt->author or $opt->all;
+    local $ENV{RELEASE_TESTING} = 1 if $opt->release or $opt->all;
+    local $ENV{AUTOMATED_TESTING} = 1 if $opt->automated or $opt->all;
 
     my ( $target, $latest ) = $self->zilla->ensure_built_in_tmpdir;
 
