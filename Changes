@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+0.016     2013-11-15 11:33:06 America/New_York
+
     [Changed]
 
     - the 'xtest' command now accepts the same options as 'test' does
