@@ -6,7 +6,7 @@ package Dist::Zilla::Plugin::RunExtraTests;
 # VERSION
 
 # Dependencies
-use Dist::Zilla 2.3 ();
+use Dist::Zilla 4.3 ();
 use Moose 2;
 use namespace::autoclean 0.09;
 
