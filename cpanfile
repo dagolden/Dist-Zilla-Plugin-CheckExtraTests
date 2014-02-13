@@ -8,6 +8,7 @@ requires "File::pushd" => "0";
 requires "Moose" => "2";
 requires "Moose::Autobox" => "0";
 requires "Path::Iterator::Rule" => "0";
+requires "Path::Tiny" => "0";
 requires "namespace::autoclean" => "0.09";
 requires "perl" => "5.006";
 requires "strict" => "0";
@@ -26,11 +27,12 @@ on 'test' => sub {
   requires "Test::Requires" => "0";
   requires "Try::Tiny" => "0";
   requires "lib" => "0";
+  requires "version" => "0";
 };
 
 on 'test' => sub {
   recommends "CPAN::Meta" => "0";
-  recommends "CPAN::Meta::Requirements" => "0";
+  recommends "CPAN::Meta::Requirements" => "2.120900";
 };
 
 on 'configure' => sub {
@@ -38,7 +40,7 @@ on 'configure' => sub {
 };
 
 on 'develop' => sub {
-  requires "Dist::Zilla" => "5.006";
+  requires "Dist::Zilla" => "5.013";
   requires "Dist::Zilla::Plugin::Prereqs" => "0";
   requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.056";
   requires "File::Spec" => "0";

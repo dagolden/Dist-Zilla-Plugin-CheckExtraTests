@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Changed]
+
+    - Removed dependency on Path::Class in favor of Path::Tiny
+
 0.016     2013-11-15 11:33:06 America/New_York
 
     [Changed]

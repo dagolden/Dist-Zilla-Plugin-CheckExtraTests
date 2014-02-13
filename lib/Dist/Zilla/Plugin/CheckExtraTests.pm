@@ -20,10 +20,12 @@ sub before_release {
     my ( $self, $tgz ) = @_;
     $tgz = $tgz->absolute;
 
-    my $build_root = $self->zilla->root->subdir('.build');
+    require Path::Tiny;
+
+    my $build_root = Path::Tiny::path( $self->zilla->root )->child('.build');
     $build_root->mkpath unless -d $build_root;
 
-    my $tmpdir = Path::Class::dir( File::Temp::tempdir( DIR => $build_root ) );
+    my $tmpdir = Path::Tiny->tempdir( DIR => $build_root );
 
     $self->log("Extracting $tgz to $tmpdir");
 
@@ -38,7 +40,7 @@ sub before_release {
       unless @files;
 
     # Run tests on the extracted tarball:
-    my $target = $tmpdir->subdir( $self->zilla->dist_basename );
+    my $target = $tmpdir->child( $self->zilla->dist_basename );
 
     local $ENV{RELEASE_TESTING} = 1;
     local $ENV{AUTHOR_TESTING}  = 1;
@@ -62,7 +64,7 @@ sub before_release {
     }
 
     $self->log("all's well; removing $tmpdir");
-    $tmpdir->rmtree;
+    $tmpdir->remove_tree;
 
     return;
 }
