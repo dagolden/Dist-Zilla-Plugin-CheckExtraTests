@@ -64,7 +64,7 @@ sub before_release {
     }
 
     $self->log("all's well; removing $tmpdir");
-    $tmpdir->remove_tree;
+    $tmpdir->remove_tree( { safe => 0 } );
 
     return;
 }

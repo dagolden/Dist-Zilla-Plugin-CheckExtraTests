@@ -2,6 +2,11 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Fixed]
+
+    - CheckExtraTest now force removes temp directory, the way
+      Path::Class used to do.
+
 0.017     2014-02-13 15:03:55-05:00 America/New_York
 
     [Changed]
