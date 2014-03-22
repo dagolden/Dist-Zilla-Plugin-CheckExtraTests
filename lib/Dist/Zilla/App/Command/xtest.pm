@@ -57,6 +57,7 @@ sub opt_spec {
   [ 'author!' => 'enables the AUTHOR_TESTING env variable (default behavior)', { default => 1 } ],
   [ 'release!'   => 'enables the RELEASE_TESTING env variable (default behavior)', { default => 1 } ],
   [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
+  [ 'jobs|j=i' => 'number of parallel test jobs to run', { default => 1 } ],
   [ 'all' => 'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables', { default => 0 } ]
 }
 
@@ -118,7 +119,7 @@ sub execute {
             );
             my @t = map { "$_" } $pcr->all('xt');
             if (@t) {
-                $app->process_args( qw/-r -b/, @t ) if @t;
+                $app->process_args( '-j', $self->jobs, qw/-r -b/, @t ) if @t;
                 $error = "Failed xt tests" unless $app->run;
             }
             else {
@@ -126,7 +127,7 @@ sub execute {
             }
         }
         else {
-            $app->process_args(qw/-r -b xt/);
+            $app->process_args( '-j', $self->jobs, qw/-r -b xt/);
             $error = "Failed xt tests" unless $app->run;
         }
     }
