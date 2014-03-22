@@ -55,11 +55,13 @@ sub before_release {
         die "no BuildRunner plugins specified" unless @builders;
         $_->build for @builders;
 
+        my $jobs = $self->can('default_jobs') ? $self->default_jobs : 1;
+
         require App::Prove;
         App::Prove->VERSION('3.00');
 
         my $app = App::Prove->new;
-        $app->process_args(qw/-r -b xt/);
+        $app->process_args('-j', $jobs, qw/-r -b xt/);
         $app->run or $self->log_fatal("Fatal errors in xt tests");
     }
 

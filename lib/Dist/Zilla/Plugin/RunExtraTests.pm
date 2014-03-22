@@ -34,11 +34,13 @@ sub test {
         die "no blib; failed to build properly?" unless -d 'blib';
     }
 
+    my $jobs = $self->can('default_jobs') ? $self->default_jobs : 1;
+
     require App::Prove;
     App::Prove->VERSION('3.00');
 
     my $app = App::Prove->new;
-    $app->process_args( qw/-r -b/, @dirs );
+    $app->process_args( '-j', $jobs, qw/-r -b/, @dirs );
     $app->run or $self->log_fatal("Fatal errors in xt tests");
     return;
 }
