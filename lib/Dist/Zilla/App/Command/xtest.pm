@@ -54,11 +54,21 @@ is sufficient to make the command available.
 =cut
 
 sub opt_spec {
-  [ 'author!' => 'enables the AUTHOR_TESTING env variable (default behavior)', { default => 1 } ],
-  [ 'release!'   => 'enables the RELEASE_TESTING env variable (default behavior)', { default => 1 } ],
-  [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
-  [ 'jobs|j=i' => 'number of parallel test jobs to run', { default => 1 } ],
-  [ 'all' => 'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables', { default => 0 } ]
+    [
+        'author!' => 'enables the AUTHOR_TESTING env variable (default behavior)',
+        { default => 1 }
+    ],
+      [
+        'release!' => 'enables the RELEASE_TESTING env variable (default behavior)',
+        { default => 1 }
+      ],
+      [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
+      [ 'jobs|j=i'  => 'number of parallel test jobs to run',        { default => 1 } ],
+      [
+        'all' =>
+          'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables',
+        { default => 0 }
+      ];
 }
 
 =head1 OPTIONS
@@ -94,8 +104,8 @@ sub execute {
     require App::Prove;
     require File::pushd;
 
-    local $ENV{AUTHOR_TESTING} = 1 if $opt->author or $opt->all;
-    local $ENV{RELEASE_TESTING} = 1 if $opt->release or $opt->all;
+    local $ENV{AUTHOR_TESTING}    = 1 if $opt->author    or $opt->all;
+    local $ENV{RELEASE_TESTING}   = 1 if $opt->release   or $opt->all;
     local $ENV{AUTOMATED_TESTING} = 1 if $opt->automated or $opt->all;
 
     my ( $target, $latest ) = $self->zilla->ensure_built_in_tmpdir;
@@ -127,7 +137,7 @@ sub execute {
             }
         }
         else {
-            $app->process_args( '-j', $self->jobs, qw/-r -b xt/);
+            $app->process_args( '-j', $self->jobs, qw/-r -b xt/ );
             $error = "Failed xt tests" unless $app->run;
         }
     }

@@ -61,7 +61,7 @@ sub before_release {
         App::Prove->VERSION('3.00');
 
         my $app = App::Prove->new;
-        $app->process_args('-j', $jobs, qw/-r -b xt/);
+        $app->process_args( '-j', $jobs, qw/-r -b xt/ );
         $app->run or $self->log_fatal("Fatal errors in xt tests");
     }
 
