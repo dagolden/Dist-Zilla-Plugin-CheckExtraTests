@@ -5,6 +5,7 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
     [Changed]
 
     - Added 'jobs' argument for 'dzil xtest' for parallel testing
+
     - passing new 'default_jobs' option (added to Dist::Zilla 5.014) through
       to test runner for parallel testing
 
