@@ -129,7 +129,7 @@ sub execute {
             );
             my @t = map { "$_" } $pcr->all('xt');
             if (@t) {
-                $app->process_args( '-j', $self->jobs, qw/-r -b/, @t ) if @t;
+                $app->process_args( '-j', $opt->jobs, qw/-r -b/, @t ) if @t;
                 $error = "Failed xt tests" unless $app->run;
             }
             else {
@@ -137,7 +137,7 @@ sub execute {
             }
         }
         else {
-            $app->process_args( '-j', $self->jobs, qw/-r -b xt/ );
+            $app->process_args( '-j', $opt->jobs, qw/-r -b xt/ );
             $error = "Failed xt tests" unless $app->run;
         }
     }

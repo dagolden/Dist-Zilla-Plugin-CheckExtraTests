@@ -41,6 +41,7 @@ on 'configure' => sub {
 
 on 'develop' => sub {
   requires "Dist::Zilla" => "5.014";
+  requires "Dist::Zilla::Plugin::CheckExtraTests" => "0";
   requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.060";
   requires "File::Spec" => "0";
   requires "File::Temp" => "0";

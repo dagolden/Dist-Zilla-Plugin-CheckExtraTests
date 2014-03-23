@@ -14,6 +14,19 @@ use namespace::autoclean 0.09;
 
 with 'Dist::Zilla::Role::BeforeRelease';
 
+=attr default_jobs
+
+This attribute is the default value that should be used as the C<jobs> argument
+for prerelease tests.
+
+=cut
+
+has default_jobs => (
+    is      => 'ro',
+    isa     => 'Int', # non-negative
+    default => 1,
+);
+
 # methods
 
 sub before_release {
@@ -55,7 +68,7 @@ sub before_release {
         die "no BuildRunner plugins specified" unless @builders;
         $_->build for @builders;
 
-        my $jobs = $self->can('default_jobs') ? $self->default_jobs : 1;
+        my $jobs = $self->default_jobs;
 
         require App::Prove;
         App::Prove->VERSION('3.00');
