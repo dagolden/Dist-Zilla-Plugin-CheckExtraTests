@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+0.020     2014-03-22 23:12:58-04:00 America/New_York
+
     [Fixed]
 
     - default jobs support was buggy in the last version
