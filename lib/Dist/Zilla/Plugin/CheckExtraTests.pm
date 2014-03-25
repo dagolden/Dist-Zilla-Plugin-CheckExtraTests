@@ -33,7 +33,7 @@ sub before_release {
     my ( $self, $tgz ) = @_;
     $tgz = $tgz->absolute;
 
-    require Path::Tiny;
+    { require Path::Tiny; Path::Tiny->VERSION(0.013) }
 
     my $build_root = Path::Tiny::path( $self->zilla->root )->child('.build');
     $build_root->mkpath unless -d $build_root;

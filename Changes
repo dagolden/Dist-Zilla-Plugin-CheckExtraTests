@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Fixed]
+
+    - specifies Path::Tiny prerequisite of 0.013 or better
+
 0.020     2014-03-22 23:12:58-04:00 America/New_York
 
     [Fixed]
