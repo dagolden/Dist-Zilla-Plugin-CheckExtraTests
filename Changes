@@ -2,6 +2,9 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    - [RunExtraTests] now accepts the --jobs flag passed to 'dzil test' and
+      'dzil release'
+
 0.021     2014-03-25 14:34:02-04:00 America/New_York
 
     [Fixed]

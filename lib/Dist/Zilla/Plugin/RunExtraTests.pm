@@ -17,7 +17,7 @@ with 'Dist::Zilla::Role::TestRunner';
 # methods
 
 sub test {
-    my $self = shift;
+    my ($self, $target, $arg) = @_;
 
     my @dirs;
     push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
@@ -34,7 +34,11 @@ sub test {
         die "no blib; failed to build properly?" unless -d 'blib';
     }
 
-    my $jobs = $self->can('default_jobs') ? $self->default_jobs : 1;
+    my $jobs = $arg && exists $arg->{jobs}
+             ? $arg->{jobs}
+             : $self->can('default_jobs')
+             ? $self->default_jobs
+             : 1;
 
     require App::Prove;
     App::Prove->VERSION('3.00');
