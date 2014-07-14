@@ -10,7 +10,7 @@ requires "Moose::Autobox" => "0";
 requires "Path::Iterator::Rule" => "0";
 requires "Path::Tiny" => "0.013";
 requires "namespace::autoclean" => "0.09";
-requires "perl" => "5.008";
+requires "perl" => "5.006";
 requires "strict" => "0";
 requires "warnings" => "0";
 
@@ -40,7 +40,7 @@ on 'configure' => sub {
 };
 
 on 'develop' => sub {
-  requires "Dist::Zilla" => "5.014";
+  requires "Dist::Zilla" => "5";
   requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.060";
   requires "File::Spec" => "0";
   requires "File::Temp" => "0";
@@ -51,4 +51,5 @@ on 'develop' => sub {
   requires "Test::More" => "0";
   requires "Test::Pod" => "1.41";
   requires "Test::Pod::Coverage" => "1.08";
+  requires "Test::Spelling" => "0.12";
 };
