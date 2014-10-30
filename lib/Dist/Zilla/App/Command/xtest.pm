@@ -8,8 +8,6 @@ our $VERSION = '0.023';
 
 use Dist::Zilla::App -command;
 
-use Moose::Autobox;
-
 =head1 SYNOPSIS
 
 Run xt tests for your distribution:
