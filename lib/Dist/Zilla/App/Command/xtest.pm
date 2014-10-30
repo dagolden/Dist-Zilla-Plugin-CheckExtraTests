@@ -3,7 +3,9 @@ use warnings;
 
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-# VERSION
+
+our $VERSION = '0.023';
+
 use Dist::Zilla::App -command;
 
 use Moose::Autobox;

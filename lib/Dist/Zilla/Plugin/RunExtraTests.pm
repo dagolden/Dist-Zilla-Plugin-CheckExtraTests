@@ -3,7 +3,8 @@ use warnings;
 
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-# VERSION
+
+our $VERSION = '0.023';
 
 # Dependencies
 use Dist::Zilla 4.3 ();
