@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Added]
+
+    - RunExtraTests now also runs miscellaneous xt/ tests
+
 0.023     2014-10-30 16:25:03-04:00 America/New_York
 
     [Changed]
