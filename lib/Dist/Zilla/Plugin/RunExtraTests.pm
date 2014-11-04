@@ -20,11 +20,12 @@ with 'Dist::Zilla::Role::TestRunner';
 sub test {
     my ($self, $target, $arg) = @_;
 
-    my @dirs;
-    push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
-    push @dirs, 'xt/smoke'   if $ENV{AUTOMATED_TESTING};
-    push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
-    @dirs = grep { -d } @dirs;
+    my %dirs; @dirs{ glob('xt/*') } = ();
+    delete $dirs{'xt/author'}  unless $ENV{AUTHOR_TESTING};
+    delete $dirs{'xt/smoke'}   unless $ENV{AUTOMATED_TESTING};
+    delete $dirs{'xt/release'} unless $ENV{RELEASE_TESTING};
+
+    my @dirs = sort keys %dirs;
     return unless @dirs;
 
     # If the dist hasn't been built yet, then build it:
@@ -67,10 +68,11 @@ In your dist.ini:
 
 =head1 DESCRIPTION
 
-Runs xt tests when the test phase is run (e.g. C<dzil test>, C<dzil release>
-etc).  C<xt/release>, C<xt/author>, and C<xt/smoke> will be tested based on the
+Runs F<xt> tests when the test phase is run (e.g. C<dzil test>, C<dzil release>
+etc).  F<xt/release>, F<xt/author>, and F<xt/smoke> will be tested based on the
 values of the appropriate environment variables (C<RELEASE_TESTING>,
 C<AUTHOR_TESTING>, and C<AUTOMATED_TESTING>), which are set by C<dzil test>.
+Additionally, all other F<xt> files and directories will always be run.
 
 If C<RunExtraTests> is listed after one of the normal test-running
 plugins (e.g. C<MakeMaker> or C<ModuleBuild>), then the dist will not
