@@ -4,7 +4,7 @@ use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
 
-our $VERSION = '0.024';
+our $VERSION = '0.025';
 
 use Dist::Zilla::App -command;
 
