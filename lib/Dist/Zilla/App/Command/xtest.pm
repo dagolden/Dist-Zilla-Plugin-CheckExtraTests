@@ -118,6 +118,8 @@ sub execute {
         die "no BuildRunner plugins specified" unless @builders;
         $_->build for @builders;
 
+        my @v = $self->zilla->logger->get_debug ? ('-v') : ();
+
         my $app = App::Prove->new;
         if ( ref $arg eq 'ARRAY' && @$arg ) {
             require Path::Iterator::Rule;
@@ -129,7 +131,7 @@ sub execute {
             );
             my @t = map { "$_" } $pcr->all('xt');
             if (@t) {
-                $app->process_args( '-j', $opt->jobs, qw/-r -b/, @t );
+                $app->process_args( '-j', $opt->jobs, @v, qw/-r -b/, @t );
                 $error = "Failed xt tests" unless $app->run;
             }
             else {
@@ -137,7 +139,7 @@ sub execute {
             }
         }
         else {
-            $app->process_args( '-j', $opt->jobs, qw/-r -b xt/ );
+            $app->process_args( '-j', $opt->jobs, @v, qw/-r -b xt/ );
             $error = "Failed xt tests" unless $app->run;
         }
     }

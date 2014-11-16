@@ -41,12 +41,13 @@ sub test {
              : $self->can('default_jobs')
              ? $self->default_jobs
              : 1;
+    my @v = $self->zilla->logger->get_debug ? ('-v') : ();
 
     require App::Prove;
     App::Prove->VERSION('3.00');
 
     my $app = App::Prove->new;
-    $app->process_args( '-j', $jobs, qw/-r -b/, @dirs );
+    $app->process_args( '-j', $jobs, @v, qw/-r -b/, @dirs );
     $app->run or $self->log_fatal("Fatal errors in xt tests");
     return;
 }

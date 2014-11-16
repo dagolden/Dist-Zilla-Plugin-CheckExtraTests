@@ -70,12 +70,13 @@ sub before_release {
         $_->build for @builders;
 
         my $jobs = $self->default_jobs;
+        my @v = $self->zilla->logger->get_debug ? ('-v') : ();
 
         require App::Prove;
         App::Prove->VERSION('3.00');
 
         my $app = App::Prove->new;
-        $app->process_args( '-j', $jobs, qw/-r -b xt/ );
+        $app->process_args( '-j', $jobs, @v, qw/-r -b xt/ );
         $app->run or $self->log_fatal("Fatal errors in xt tests");
     }
 
