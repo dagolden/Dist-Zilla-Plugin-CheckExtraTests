@@ -4,7 +4,7 @@ use warnings;
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
 
-our $VERSION = '0.025';
+our $VERSION = '0.026';
 
 # Dependencies
 use Dist::Zilla 4.3 ();
