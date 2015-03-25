@@ -2,6 +2,11 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Fixed]
+
+    - Fixed test corpuses (corpii?) to protect against META validation
+      errors
+
 0.025     2014-11-21 11:29:50-05:00 America/New_York
 
     [Changed]
