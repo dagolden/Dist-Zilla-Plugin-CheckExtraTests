@@ -4,7 +4,7 @@ use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
 
-our $VERSION = '0.026';
+our $VERSION = '0.027';
 
 # Dependencies
 use Dist::Zilla 4.3 ();
