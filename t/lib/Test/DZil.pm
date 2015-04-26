@@ -3,7 +3,6 @@ use warnings;
 
 package Test::DZil;
 
-use Dist::Zilla::Tester;
 use Params::Util qw(_HASH0);
 
 use Sub::Exporter -setup => {
