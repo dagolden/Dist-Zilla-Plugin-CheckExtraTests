@@ -7,6 +7,7 @@ use lib 't/lib';
 use Capture::Tiny qw/capture/;
 use Dist::Zilla::App::Tester;
 use Test::DZil;
+use Test::Requires { 'Dist::Zilla::Tester' => 4.300017 };
 use Test::More 0.88;
 use Try::Tiny;
 
