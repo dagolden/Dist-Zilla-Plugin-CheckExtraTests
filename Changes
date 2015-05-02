@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Documented]
+
+    - Changed order of 'xt' commands in help text for clarity
+
 0.026     2015-03-24 23:35:49-04:00 America/New_York
 
     [Fixed]
