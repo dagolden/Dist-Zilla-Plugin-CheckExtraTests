@@ -63,12 +63,12 @@ sub opt_spec {
         { default => 1 }
       ],
       [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
-      [ 'jobs|j=i'  => 'number of parallel test jobs to run',        { default => 1 } ],
       [
         'all' =>
           'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables',
         { default => 0 }
-      ];
+      ],
+      [ 'jobs|j=i'  => 'number of parallel test jobs to run',        { default => 1 } ];
 }
 
 =head1 OPTIONS
