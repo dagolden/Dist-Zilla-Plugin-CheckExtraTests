@@ -20,13 +20,14 @@ with 'Dist::Zilla::Role::TestRunner';
 sub test {
     my ($self, $target, $arg) = @_;
 
-    my %dirs; @dirs{ glob('xt/*') } = ();
+    my %dirs; @dirs{ grep { -d } glob('xt/*') } = ();
     delete $dirs{'xt/author'}  unless $ENV{AUTHOR_TESTING};
     delete $dirs{'xt/smoke'}   unless $ENV{AUTOMATED_TESTING};
     delete $dirs{'xt/release'} unless $ENV{RELEASE_TESTING};
 
     my @dirs = sort keys %dirs;
-    return unless @dirs;
+    my @files = grep { -f } glob('xt/*');
+    return unless @dirs or @files;
 
     # If the dist hasn't been built yet, then build it:
     unless ( -d 'blib' ) {
@@ -47,6 +48,9 @@ sub test {
     App::Prove->VERSION('3.00');
 
     my $app = App::Prove->new;
+
+    $self->log_debug([ 'running prove with args: %s', join(' ', '-j', $jobs, @v, qw/-b xt/) ]);
+    $app->process_args( '-j', $jobs, @v, qw/-b xt/);
 
     $self->log_debug([ 'running prove with args: %s', join(' ', '-j', $jobs, @v, qw/-r -b/, @dirs) ]);
     $app->process_args( '-j', $jobs, @v, qw/-r -b/, @dirs );

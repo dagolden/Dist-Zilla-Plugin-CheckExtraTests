@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Fixed]
+
+    - non-perl files in xt/* are not executed
+
 0.027     2015-05-02 15:41:56-04:00 America/New_York
 
     [Documented]

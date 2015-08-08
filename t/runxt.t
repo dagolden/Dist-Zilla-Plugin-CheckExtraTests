@@ -57,7 +57,7 @@ local $ENV{AUTOMATED_TESTING};
     }
     catch {
         my $err = $_;
-        like( $err, qr/Fatal errors in xt/i, "RunExtraTests caught xt test failure", );
+        like( $err, qr/Fatal errors in xt/i, "RunExtraTests caught xt test failure in author test", );
     }
 }
 
@@ -80,6 +80,47 @@ local $ENV{AUTOMATED_TESTING};
         grep( {/all's well/i} @{ $tzil->log_messages } ),
         "handles nonexistent test dirs",
     );
+}
+
+{
+    my $tzil = Dist::Zilla::Tester->from_config(
+        { dist_root => 'corpus/RunXT' },
+        { add_files => { 'source/xt/bleh' => 'this is not a runnable test!', }, },
+    );
+    ok( $tzil, "created test dist" );
+    $tzil->chrome->logger->set_debug(1);
+
+    local $ENV{AUTHOR_TESTING} = 1;
+    try {
+        capture { $tzil->test };
+    }
+    catch {
+        my $err = $_;
+        fail( $err );
+        diag 'got log messages: ', explain $tzil->log_messages;
+    };
+
+    ok(
+        grep( {/all's well/i} @{ $tzil->log_messages } ),
+        "handles non-perl files in xt/",
+    );
+}
+
+{
+    my $tzil = Dist::Zilla::Tester->from_config(
+        { dist_root => 'corpus/RunXT' },
+        { add_files => { 'source/xt/checkme.t' => $xt_fail, }, },
+    );
+    ok( $tzil, "created test dist" );
+    $tzil->chrome->logger->set_debug(1);
+
+    try {
+        capture { $tzil->test };
+    }
+    catch {
+        my $err = $_;
+        like( $err, qr/Fatal errors in xt/i, "RunExtraTests caught xt test failure in root directory", );
+    }
 }
 
 done_testing;
