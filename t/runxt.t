@@ -27,7 +27,14 @@ local $ENV{AUTOMATED_TESTING};
     );
     ok( $tzil, "created test dist" );
 
-    capture { $tzil->test };
+    try {
+        capture { $tzil->test };
+    }
+    catch {
+        my $err = $_;
+        fail( $err );
+        diag 'got log messages: ', explain $tzil->log_messages;
+    };
 
     ok(
         grep( {/all's well/i} @{ $tzil->log_messages } ),
@@ -57,7 +64,14 @@ local $ENV{AUTOMATED_TESTING};
     ok( $tzil, "created test dist" );
 
     local $ENV{AUTHOR_TESTING} = 1;
-    capture { $tzil->test };
+    try {
+        capture { $tzil->test };
+    }
+    catch {
+        my $err = $_;
+        fail( $err );
+        diag 'got log messages: ', explain $tzil->log_messages;
+    };
 
     ok(
         grep( {/all's well/i} @{ $tzil->log_messages } ),
