@@ -47,6 +47,8 @@ sub test {
     App::Prove->VERSION('3.00');
 
     my $app = App::Prove->new;
+
+    $self->log_debug([ 'running prove with args: %s', join(' ', '-j', $jobs, @v, qw/-r -b/, @dirs) ]);
     $app->process_args( '-j', $jobs, @v, qw/-r -b/, @dirs );
     $app->run or $self->log_fatal("Fatal errors in xt tests");
     return;

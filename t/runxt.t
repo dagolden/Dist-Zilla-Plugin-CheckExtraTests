@@ -26,6 +26,7 @@ local $ENV{AUTOMATED_TESTING};
         { add_files => { 'source/xt/author/checkme.t' => $xt_fail, }, },
     );
     ok( $tzil, "created test dist" );
+    $tzil->chrome->logger->set_debug(1);
 
     try {
         capture { $tzil->test };
@@ -48,6 +49,7 @@ local $ENV{AUTOMATED_TESTING};
         { add_files => { 'source/xt/author/checkme.t' => $xt_fail, }, },
     );
     ok( $tzil, "created test dist" );
+    $tzil->chrome->logger->set_debug(1);
 
     local $ENV{AUTHOR_TESTING} = 1;
     try {
@@ -62,6 +64,7 @@ local $ENV{AUTOMATED_TESTING};
 {
     my $tzil = Dist::Zilla::Tester->from_config( { dist_root => 'corpus/RunXT' }, );
     ok( $tzil, "created test dist" );
+    $tzil->chrome->logger->set_debug(1);
 
     local $ENV{AUTHOR_TESTING} = 1;
     try {
