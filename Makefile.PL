@@ -12,7 +12,6 @@ my %WriteMakefileArgs = (
     "ExtUtils::MakeMaker" => "6.17"
   },
   "DISTNAME" => "Dist-Zilla-Plugin-CheckExtraTests",
-  "EXE_FILES" => [],
   "LICENSE" => "apache",
   "MIN_PERL_VERSION" => "5.006",
   "NAME" => "Dist::Zilla::Plugin::CheckExtraTests",
@@ -59,7 +58,7 @@ my %FallbackPrereqs = (
   "Dist::Zilla::App::Tester" => 0,
   "Dist::Zilla::Role::BeforeRelease" => 0,
   "Dist::Zilla::Role::TestRunner" => 0,
-  "ExtUtils::MakeMaker" => "6.17",
+  "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "File::pushd" => 0,
   "Moose" => 2,
