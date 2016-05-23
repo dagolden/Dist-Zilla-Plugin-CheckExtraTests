@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
 {{$NEXT}}
 
+    [Fixed]
+
+    - Fixed tmpdir removal with Dist::Zilla 6+
+
 0.028     2015-08-10 10:52:35-04:00 America/New_York
 
     [Fixed]

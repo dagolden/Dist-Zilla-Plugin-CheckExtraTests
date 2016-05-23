@@ -7,6 +7,7 @@ package Dist::Zilla::App::Command::xtest;
 our $VERSION = '0.029';
 
 use Dist::Zilla::App -command;
+use Path::Tiny;
 
 =head1 SYNOPSIS
 
@@ -68,7 +69,7 @@ sub opt_spec {
           'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables',
         { default => 0 }
       ],
-      [ 'jobs|j=i'  => 'number of parallel test jobs to run',        { default => 1 } ];
+      [ 'jobs|j=i' => 'number of parallel test jobs to run', { default => 1 } ];
 }
 
 =head1 OPTIONS
@@ -151,7 +152,7 @@ sub execute {
     }
     else {
         $self->log("all's well; removing $target");
-        $target->rmtree;
+        path($target)->remove_tree( { safe => 0 } );
         $latest->remove if $latest;
     }
 
