@@ -123,14 +123,14 @@ sub execute {
 
         my $app = App::Prove->new;
         if ( ref $arg eq 'ARRAY' && @$arg ) {
-            require Path::Iterator::Rule;
-            my $pcr = Path::Iterator::Rule->new->file->and(
+            require File::Find::Rule;
+            my $pcr = File::Find::Rule->new->file->exec(
                 sub {
-                    my $path = $_;
+                    my $path = $_[2];
                     return grep { $path =~ /$_/ } @$arg;
                 }
             );
-            my @t = map { "$_" } $pcr->all('xt');
+            my @t = map { "$_" } $pcr->in('xt');
             if (@t) {
                 $app->process_args( '-j', $opt->jobs, @v, qw/-r -b/, @t );
                 $error = "Failed xt tests" unless $app->run;
